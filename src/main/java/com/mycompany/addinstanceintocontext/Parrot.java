@@ -1,8 +1,6 @@
 package com.mycompany.addinstanceintocontext;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
-
 
 /**
  * Parrot
@@ -13,7 +11,9 @@ public class Parrot {
     private String name;
 
 	public Parrot() {
+        System.out.println("Parrot with component class java!");
 	}
+
 
 	public Parrot(String name) {
         System.out.println("Parrot constructor");
