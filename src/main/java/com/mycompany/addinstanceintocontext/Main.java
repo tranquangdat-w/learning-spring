@@ -8,10 +8,9 @@ public class Main {
 
         // context.registerBean("parrot1", Parrot.class, () -> new Parrot("Kiki"), bc -> bc.setPrimary(true));
         // context.registerBean("parrot2", Parrot.class, () -> new Parrot("Koko"));
-        Person person = context.getBean(Person.class);
-        Parrot parrot = context.getBean("parrot", Parrot.class);
-        System.out.println(parrot);
+        Person person = context.getBean("person", Person.class);
         System.out.println(person);
         context.close();
     } 
 }
+
