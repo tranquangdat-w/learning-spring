@@ -8,11 +8,13 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+// @Primary
 public class Parrot {
     private String name;
 
-	public Parrot() {
-	}
+    public Parrot() {
+        this.name = "parrot";
+    }
 
 	public Parrot(String name) {
         System.out.println("Parrot constructor");

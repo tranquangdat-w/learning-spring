@@ -1,24 +1,27 @@
 package com.mycompany.addinstanceintocontext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Person {
-    private String name; 
-
-    private final Parrot parrot;
-
-    public Person() {
-        this.parrot = new Parrot("Person with default parrot");
-    }
-
-    public Person(String name) {
-        this.parrot = new Parrot("Person with default parrot");
-        this.name = name;
-    }
+    private String name = "Ella"; 
     
+    private Parrot parrot;
+
+	public Person() {
+        System.out.println("This is the person constructer");
+	}
+
     @Autowired
-	public Person(Parrot parrot) {
+	public void setParrot(@Qualifier("parrot1") Parrot parrot) {
+        System.out.println("setParrot method");
 		this.parrot = parrot;
+	}
+
+	public Person(Parrot parrot) {
+        this.parrot = parrot;
 	}
 
 	public String getName() {
@@ -36,3 +39,4 @@ public class Person {
         return "Person [name=" + name + ", parrot=" + parrot + "]";
     }
 }
+
