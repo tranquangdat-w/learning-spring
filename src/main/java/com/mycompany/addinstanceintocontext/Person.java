@@ -11,12 +11,10 @@ public class Person {
     private Parrot parrot;
 
 	public Person() {
-        System.out.println("This is the person constructer");
 	}
 
     @Autowired
 	public void setParrot(@Qualifier("parrot1") Parrot parrot) {
-        System.out.println("setParrot method");
 		this.parrot = parrot;
 	}
 

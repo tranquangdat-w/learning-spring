@@ -1,22 +1,31 @@
 package com.mycompany.commentexample.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.mycompany.commentexample.Comment;
+import com.mycompany.commentexample.CommentProcessor;
 import com.mycompany.commentexample.proxies.CommentNotificationProxy;
 import com.mycompany.commentexample.repositories.CommentRepository;
 
-@Component
+@Service
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
+@Lazy
 public class CommentService {
-    @Autowired
     private CommentRepository commentRepository;
-    @Autowired
-    private CommentNotificationProxy commentProxy;
+    private CommentNotificationProxy notificationProxy;
 
-	public CommentService(CommentRepository commentRepository, CommentNotificationProxy commentProxy) {
+    @Autowired
+    private ApplicationContext context;
+
+	public CommentService(CommentRepository commentRepository, @Qualifier("email1") CommentNotificationProxy notificationProxy) {
 		this.commentRepository = commentRepository;
-		this.commentProxy = commentProxy;
+		this.notificationProxy = notificationProxy;
 	}
 
 	public void publishComment(Comment comment) {
@@ -24,11 +33,26 @@ public class CommentService {
         commentRepository.storeComment(comment);
 
         // Send the comment to the external service
-        commentProxy.sendNotifyComment(comment);
+        notificationProxy.sendNotifyComment(comment);
     }
+
+    public void sendComment(Comment c) {
+        CommentProcessor commentProcessor = context.getBean(CommentProcessor.class);
+        System.out.println(String.format("Comment before processing: %s", commentProcessor));
+        commentProcessor.setComment(c);
+        commentProcessor.validateCommnet(c);
+        commentProcessor.processComment(c);
+        c = commentProcessor.getComment();
+        System.out.println(String.format("Comment after processing: %s", c));
+    }
+
 
     @Override
     public String toString() {
-        return "CommentService [commentRepository=" + commentRepository + ", commentProxy=" + commentProxy + "]";
+        return "CommentService [commentRepository=" + commentRepository + ", commentProxy=" + notificationProxy + "]";
+    }
+
+    public CommentRepository getCommentRepository() {
+        return commentRepository;
     }
 }

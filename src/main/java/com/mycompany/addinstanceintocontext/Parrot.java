@@ -17,7 +17,6 @@ public class Parrot {
     }
 
 	public Parrot(String name) {
-        System.out.println("Parrot constructor");
 		this.name = name;
 	}
 
