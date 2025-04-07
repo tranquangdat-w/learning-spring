@@ -1,27 +1,29 @@
 package com.mycompany.commentexample;
 
+import java.util.logging.Logger;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.mycompany.commentexample.proxies.EmailNotificationProxy;
-import com.mycompany.commentexample.repositories.CommentRepository;
-// import com.mycompany.commentexample.proxies.CommentNotificationProxy;
-// import com.mycompany.commentexample.repositories.CommentRepository;
+import com.mycompany.commentexample.aspects.LoggingAspect;
 import com.mycompany.commentexample.services.CommentService;
-import com.mycompany.commentexample.services.UserService;
 
 public class Main {
+    private static Logger logger = Logger.getLogger(Main.class.getName());
     public static void main(String[] args) {
+        System.out.println("\nRunning Application:...");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ProjectConfiguration.class);
 
-        CommentService commentService = context.getBean("commentService", CommentService.class);
+        CommentService commentService = context.getBean(CommentService.class);
+        Comment comment = new Comment("Hello World", "John Doe");
 
+        // Return of the publishComment() be intercepted by the AOP
+        /* String value = commentService.publishComment(commnet);
 
-        Comment c2 = new Comment("Commnet1", "Tran Quang Dat");
-        commentService.sendComment(c2);
+        logger.info(value); */
 
-        Comment c1 = new Comment("Commnet2", "Tran Quang Dat");
-        commentService.sendComment(c1);
+        commentService.deleteComment(comment);
 
         context.close();
     } 
 }
+
