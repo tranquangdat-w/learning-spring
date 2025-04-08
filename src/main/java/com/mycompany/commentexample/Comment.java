@@ -30,3 +30,4 @@ public class Comment {
 		return "Comment [text=" + text + ", author=" + author + "]";
 	}
 }
+
