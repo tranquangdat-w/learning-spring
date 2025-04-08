@@ -18,5 +18,10 @@ public class ProjectConfiguration {
     public CommentNotificationProxy email1() {
         return new EmailNotificationProxy(); 
     }
+
+    @Bean
+    public LoggingAspect loggingAspect() {
+        return new LoggingAspect();
+    }
 }
 
