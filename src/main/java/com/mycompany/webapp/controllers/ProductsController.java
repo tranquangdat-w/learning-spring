@@ -4,14 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.webapp.model.Product;
 import com.mycompany.webapp.service.ProductService;
-
-import jakarta.annotation.PostConstruct;
 
 /**
  * ProductsController
@@ -25,7 +20,15 @@ public class ProductsController {
         this.productService = productService;
     }
 
+    /**
+     * @param p
+     * @param model
+     * @return
+     */
     @PostMapping(path = "/products")
+/*     This method automatically create product with requestparamaters name of instance of product. 
+    In this situation requestparamater are name and price
+    But in this class must have getter method for name and price */
     public String addProduct(Product p, Model model) {
         productService.addProduct(p);
         var products = productService.findAll();

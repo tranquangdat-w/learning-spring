@@ -1,6 +1,5 @@
 package com.mycompany.commentexample.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.commentexample.repositories.CommentRepository;
@@ -9,7 +8,7 @@ import com.mycompany.commentexample.repositories.CommentRepository;
 public class UserService {
     private CommentRepository commentRepository;
 
-    @Autowired
+    // Spring Auto add Autowired
 	public UserService(CommentRepository commentRepository) {
 		this.commentRepository = commentRepository;
 	}
