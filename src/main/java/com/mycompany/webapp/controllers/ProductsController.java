@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.mycompany.webapp.model.Product;
 import com.mycompany.webapp.service.ProductService;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * ProductsController
  */
 
 @Controller
+@Getter
+@Setter
 public class ProductsController {
     private final ProductService productService;
 

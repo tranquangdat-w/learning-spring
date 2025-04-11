@@ -3,6 +3,9 @@ package com.mycompany.webapp.model;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
+import com.mycompany.webapp.service.LoggedUserManagementService;
+import com.mycompany.webapp.service.LoginCountService;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,21 +17,34 @@ import lombok.Setter;
 @Getter
 @Setter
 @Component
-// @RequestScope
+@RequestScope
 public class LoginProcessor {
-    private String username = "default name";
-    private String password = "default password";
+    private final LoggedUserManagementService loggedUserManagementService;
+    private final LoginCountService loginCountService;
 
-    public LoginProcessor() {
+    private String username;
+    private String password;
+
+    public LoginProcessor(
+        LoggedUserManagementService loggedUserManagementService,
+        LoginCountService loginCountService
+    ) {
+        this.loggedUserManagementService = loggedUserManagementService;
+        this.loginCountService = loginCountService;
     }
 
-    public LoginProcessor(String password, String username) {
-		this.password = password;
-		this.username = username;
-	}
-
     public boolean login() {
-        return username.equals("dat") && password.equals("123");
+        loginCountService.increment();
+
+        boolean loginResult = false;
+
+        if (username.equals("dat") && password.equals("123")) {
+            loginResult = true;
+
+            loggedUserManagementService.setUsername(this.username);
+        }
+
+        return loginResult;
     }
 }
 
