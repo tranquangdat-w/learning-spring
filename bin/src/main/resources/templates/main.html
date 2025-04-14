@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body>
+    <h1>Welcome, <span th:text="${username}"></span></h1>
+    <h1>Count login attempts: <span th:text="${logincount}"></span></h1>
+    <!-- call with logout = "" and this isn't null -->
+    <a href="/main?logout">Logout</a>
+</body>
+</html>
