@@ -12,7 +12,7 @@ import com.mycompany.restwebapp.dto.ErrorDetails;
 
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
-    @ExceptionHandler({NotEnoughMoneyException.class})
+    @ExceptionHandler({ NotEnoughMoneyException.class })
     public ResponseEntity<ErrorDetails> exceptinoNotEnoughMoneyHandler() {
         ErrorDetails errorDetails = new ErrorDetails();
         errorDetails.setMessage("Not enough money");

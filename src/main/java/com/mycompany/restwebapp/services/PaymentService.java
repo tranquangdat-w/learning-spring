@@ -15,5 +15,4 @@ public class PaymentService {
     public PaymentDetails processPayment() {
         throw new NotEnoughMoneyException();
     }
-    
 }

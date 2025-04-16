@@ -4,12 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * ErrorDetails
+ * ErrorDetails.
  */
 
 @Getter
 @Setter
 public class ErrorDetails {
 
-    private String message;
+  private String message;
 }
