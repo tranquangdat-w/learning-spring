@@ -2,8 +2,8 @@ package com.mycompany.resttransaction.repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
-import org.bouncycastle.util.Objects;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,23 +15,29 @@ import lombok.AllArgsConstructor;
 @Repository
 @AllArgsConstructor
 public class AccountRepository {
-  private final JdbcTemplate jdbc; 
+  private final JdbcTemplate jdbc;
 
-  public void setAmount(int userId, BigDecimal amount) {
-    String sql = "UPDATE account set amount = ? where id = ?";
+  public void setAmount(long userId, BigDecimal amount) {
+    String sql = "UPDATE account SET amount = ? WHERE id = ?";
 
     jdbc.update(sql, amount, userId);
   }
 
   public List<Account> findAllAccounts() {
-    String sql = "select * from account";
+    String sql = "SELECT * FROM account";
 
     return jdbc.query(sql, new AccountRowMapper());
   }
 
-  public Account findAccountById(long id) {
-    String sql = "select * from account where id = ?";
+  public Optional<Account> findAccountById(long id) {
+    String sql = "SELECT * FROM account WHERE id = ?";
 
-    return jdbc.queryForObject(sql, new AccountRowMapper(), id);
+    try {
+      Account user = jdbc.queryForObject(sql, new AccountRowMapper(), id);
+      return Optional.ofNullable(user);
+    } catch (Exception e) {
+      return Optional.empty();
+    }
+
   }
 }

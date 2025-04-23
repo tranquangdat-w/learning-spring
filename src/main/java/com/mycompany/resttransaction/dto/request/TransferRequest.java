@@ -1,4 +1,4 @@
-package com.mycompany.resttransaction.dto;
+package com.mycompany.resttransaction.dto.request;
 
 import java.math.BigDecimal;
 

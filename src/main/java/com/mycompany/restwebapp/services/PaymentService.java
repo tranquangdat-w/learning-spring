@@ -13,6 +13,6 @@ import com.mycompany.restwebapp.model.PaymentDetails;
 public class PaymentService {
 
     public PaymentDetails processPayment() {
-        throw new NotEnoughMoneyException();
+        throw new NotEnoughMoneyException("You do not have enough money to perform this action!");
     }
 }

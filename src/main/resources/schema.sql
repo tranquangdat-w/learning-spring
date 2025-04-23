@@ -5,8 +5,7 @@ CREATE TABLE IF NOT EXISTS purchase (
 );
 
 CREATE TABLE IF NOT EXISTS account (
-  id int AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(50) NOT NULL,
-  amount double NOT NULL,
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name varchar(50) NOT NULL,
+  amount double NOT NULL
 );
-

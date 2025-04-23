@@ -15,7 +15,7 @@ public class AccountRowMapper implements RowMapper<Account>{
 
     accountObject.setId(rs.getInt("id"));
     accountObject.setAmount(rs.getBigDecimal("amount"));
-    accountObject.setUsername(rs.getString("username"));
+    accountObject.setUsername(rs.getString("name"));
     return accountObject;
 	}
 }
