@@ -113,7 +113,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>com.mycompany.restwebapp.Main</mainClass>
+          <mainClass>com.mycompany.resttransaction.Main</mainClass>
         </configuration>
       </plugin>
 
