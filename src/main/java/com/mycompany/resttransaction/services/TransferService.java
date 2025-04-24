@@ -19,12 +19,12 @@ public class TransferService {
 
   @Transactional
   public void transferMoney(long senderId, long receiverId, BigDecimal transferAmount) {
-    Account senderAccount = accountRepository.findAccountById(senderId).orElseThrow(() -> new AccountNotFoundException());
+    Account senderAccount = accountRepository.findAccountById(senderId).orElseThrow(() -> new AccountNotFoundException("Sender account not found!"));
 
-    Account receiverAccount = accountRepository.findAccountById(receiverId).orElseThrow(() -> new AccountNotFoundException());
+    Account receiverAccount = accountRepository.findAccountById(receiverId).orElseThrow(() -> new AccountNotFoundException("Reciver account not found!"));
 
     if (senderAccount.getAmount().compareTo(transferAmount) < 0) {
-      throw new NotEnoughMoneyException(); 
+      throw new NotEnoughMoneyException(String.format("User with id %d do not have enough money to transfer %.2f$ to user with id %d", senderId, transferAmount,receiverId)); 
     }
 
     BigDecimal senderNewAmount = senderAccount.getAmount().subtract(transferAmount);

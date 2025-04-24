@@ -1,12 +1,10 @@
-package com.mycompany.resttransaction.exception;
+package com.mycompany.springdata.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 @AllArgsConstructor
 public class NotEnoughMoneyException extends RuntimeException {
-  private final String message;
+  private String message;
 }

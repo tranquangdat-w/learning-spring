@@ -12,14 +12,14 @@ import com.mycompany.resttransaction.exception.NotEnoughMoneyException;
 @RestControllerAdvice
 public class AccountControllerAdvice {
   @ExceptionHandler({ NotEnoughMoneyException.class })
-  public ResponseEntity<ErrorDetails> handleNotEnoughMoneyException() {
-    ErrorDetails notEnoughMoneyException = new ErrorDetails("You do not have enough money to perform this action!");
+  public ResponseEntity<ErrorDetails> handleNotEnoughMoneyException(NotEnoughMoneyException ex) {
+    ErrorDetails notEnoughMoneyException = new ErrorDetails(ex.getMessage());
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(notEnoughMoneyException);
   }
 
   @ExceptionHandler({ AccountNotFoundException.class })
-  public ResponseEntity<ErrorDetails> handleAccountNotFoundException() {
-    ErrorDetails accountNotFoundError = new ErrorDetails("This account not found!");
+  public ResponseEntity<ErrorDetails> handleAccountNotFoundException(AccountNotFoundException ex) {
+    ErrorDetails accountNotFoundError = new ErrorDetails(ex.getMessage());
 
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(accountNotFoundError);
   }
