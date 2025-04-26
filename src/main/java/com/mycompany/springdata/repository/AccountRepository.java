@@ -13,14 +13,14 @@ import com.mycompany.springdata.model.Account;
 
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long> {
-  @Query("SELECT * FROM account a WHERE a.name = :nam")
+  @Query("SELECT * FROM account a WHERE a.name = :name")
   List<Account> findAccountsByName(String name); 
 
   @Modifying
-  @Query("UPDATE account SET amount := amount WHERE id := id")
+  @Query("UPDATE account SET amount = :amount WHERE id = :id")
   void changeAmount(long id, BigDecimal amount);
 
-  @Query("SELECT * FROM account WHERE id := id")
+  @Query("SELECT * FROM account WHERE id = :id")
   Optional<Account> findOneAccountById(long id);
 
   @Query("SELECT * FROM account")

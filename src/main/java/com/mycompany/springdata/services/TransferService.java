@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mycompany.resttransaction.exception.AccountNotFoundException;
-import com.mycompany.resttransaction.exception.NotEnoughMoneyException;
+import com.mycompany.springdata.exception.AccountNotFoundException;
+import com.mycompany.springdata.exception.NotEnoughMoneyException;
 import com.mycompany.springdata.model.Account;
 import com.mycompany.springdata.repository.AccountRepository;
 
@@ -28,7 +28,7 @@ public class TransferService {
     Account receiverAccount = accountRepository.findOneAccountById(receiverId).orElseThrow(() -> new AccountNotFoundException(String.format("Not found user with id %d", receiverId)));
 
     if (senderAccount.getAmount().compareTo(exchangeAmount) < 0) {
-      throw new NotEnoughMoneyException(String.format("User wiht id %d do not have enough money to transfer %.2f$", senderId, exchangeAmount));
+      throw new NotEnoughMoneyException(String.format("User id %d do not have enough money to transfer %.2f$", senderId, exchangeAmount));
     }
 
     BigDecimal newSenderAccountAmount = senderAccount.getAmount().subtract(exchangeAmount);

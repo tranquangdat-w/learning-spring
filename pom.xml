@@ -118,7 +118,8 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>com.mycompany.springdata.Main</mainClass>
+          <jvmArguments>-ea</jvmArguments>
+          <mainClass>com.mycompany.testspring.Main</mainClass>
         </configuration>
       </plugin>
 
